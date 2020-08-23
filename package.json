@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "env-cmd nodemon --exec babel-node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,9 +18,19 @@
   },
   "homepage": "https://github.com/zjohnsilver/api-college#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "nodemon": "^2.0.4",
     "standard": "^14.3.4"
+  },
+  "_moduleAliases": {
+    "@": "src",
+    "@api": "src/api"
   }
 }
