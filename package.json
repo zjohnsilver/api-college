@@ -1,0 +1,28 @@
+{
+  "name": "api-college",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjohnsilver/api-college.git"
+  },
+  "author": "John Silver",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zjohnsilver/api-college/issues"
+  },
+  "homepage": "https://github.com/zjohnsilver/api-college#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "standard": "^14.3.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}
