@@ -1,17 +1,26 @@
 export class StudentRepository {
+  constructor (pool) {
+    this.pool = pool
+  }
+
   async get (id) {
-    return {
-      id: id,
-      name: 'John'
-    }
+    return await this.pool.query('SELECT * FROM manage.student WHERE matriculation=$1', [id])
+      .then(({ rows }) => {
+        console.log(rows[0])
+        return rows[0] || {}
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 
   async getAll () {
-    return [
-      {
-        id: '20151045050465',
-        name: 'John'
-      }
-    ]
+    return await this.pool.query('SELECT * FROM manage.student')
+      .then(({ rows }) => {
+        return rows || []
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }
