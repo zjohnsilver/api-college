@@ -1,6 +1,6 @@
 import { ok } from '@api/helpers/http/http-helper'
 
-export class GetAllStudentsController {
+export class GetAllStudents {
   constructor (repository) {
     this.repository = repository
   }

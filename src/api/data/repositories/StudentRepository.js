@@ -1,26 +1,53 @@
+import {
+  getOne, getMultiple
+} from '@services'
+
 export class StudentRepository {
   constructor (pool) {
     this.pool = pool
   }
 
   async get (id) {
-    return await this.pool.query('SELECT * FROM manage.student WHERE matriculation=$1', [id])
-      .then(({ rows }) => {
-        console.log(rows[0])
-        return rows[0] || {}
-      })
-      .catch(e => {
-        console.log(e)
-      })
+    return getOne(this.pool, queryGetStudentByID, [id])
   }
 
   async getAll () {
-    return await this.pool.query('SELECT * FROM manage.student')
-      .then(({ rows }) => {
-        return rows || []
-      })
-      .catch(e => {
-        console.log(e)
-      })
+    return getMultiple(this.pool, queryGetAllStudents)
+  }
+
+  async getSubjects (id) {
+    return getMultiple(this.pool, queryGetStudentSubjects, [id])
   }
 }
+
+const queryGetStudentByID = `
+  SELECT 
+    id, 
+    matriculation,
+    name,
+    email,
+    birth_day,
+    started_in 
+  FROM manage.student WHERE matriculation=$1
+`
+
+const queryGetAllStudents = `
+  SELECT 
+    id, 
+    matriculation,
+    name,
+    email,
+    birth_day,
+    started_in 
+  FROM manage.student
+`
+
+const queryGetStudentSubjects = `
+  SELECT 
+    subject.id, 
+    subject.name 
+  FROM manage."class"
+  LEFT JOIN manage.subject ON "class".subject_id = subject.id 
+  LEFT JOIN manage.student ON "student".id = "class".student_id
+  WHERE student.matriculation = $1
+`

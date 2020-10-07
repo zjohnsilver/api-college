@@ -32,6 +32,10 @@
   },
   "_moduleAliases": {
     "@": "src",
-    "@api": "src/api"
+    "@api": "src/api",
+    "@adapters": "src/api/adapters",
+    "@controllers": "src/api/controllers",
+    "@services": "src/api/services",
+    "@helpers/errors": "src/api/helpers/errors"
   }
 }

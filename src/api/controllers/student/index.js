@@ -1,2 +1,3 @@
-export { GetStudentController } from './get-student-controller'
-export { GetAllStudentsController } from './get-all-students-controller'
+export { GetStudent } from './get-student'
+export { GetAllStudents } from './get-all-students'
+export { GetStudentSubjects } from './get-student-subjects'
