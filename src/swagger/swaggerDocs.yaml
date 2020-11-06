@@ -1,0 +1,83 @@
+openapi: "3.0.1"
+info: 
+  version: "1.3.0"
+  title: "College API"
+  description: "API para estudo de caso de TCC"
+
+tags:
+- name: "Student"
+  description: "Student Routes"
+
+paths:
+  /api/students:
+    get:
+      tags:
+        - "Student"
+      summary: "Get all base info of Students"
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
+  /api/students/{matriculation}:
+    get:
+      tags:
+        - "Student"
+      summary: "Get all base info of Students"
+      parameters:
+        - name: matriculation
+          in: path
+          description: matriculation of student
+          required: true
+          schema:
+            type: integer
+            example: YYYY0001110123
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
+  /api/students/{matriculation}/subjects:
+    get:
+      tags:
+        - "Student"
+      summary: "Get all base info of Students"
+      parameters:
+        - name: matriculation
+          in: path
+          description: matriculation of student
+          required: true
+          schema:
+            type: integer
+            example: YYYY0001110123
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
+  /api/students/{matriculation}/historic:
+    get:
+      tags:
+        - "Student"
+      summary: "Get all base info of Students"
+      parameters:
+        - name: matriculation
+          in: path
+          description: matriculation of student
+          required: true
+          schema:
+            type: integer
+            example: YYYY0001110123
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"
