@@ -27,6 +27,19 @@ export class StudentRepository {
     const { matriculation, name, email, birth_day, started_in } = params
     return getOne(this.pool, queryCreateStudent, [ matriculation, name, email, birth_day, started_in ])
   }
+
+  async updateStudent (matriculation, params) {
+    const paramsKeys = Object.keys(params)
+
+    const queryUpdateStudent = `
+      UPDATE manage."student"
+        SET ${paramsKeys.filter(param => params[param]).map(param => `${param} = '${params[param]}'`).join(',\n')}
+      WHERE matriculation = '${matriculation}'
+      RETURNING *
+    `
+
+    return getOne(this.pool, queryUpdateStudent)
+  }
 }
 
 const queryGetStudentByID = `
