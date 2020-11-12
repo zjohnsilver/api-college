@@ -4,11 +4,15 @@ import env from './config/env'
 import setupRoutes from './config/routes'
 import { Logger } from '@loaders'
 import swaggerRouter from './swagger/route'
+import bodyParser from 'body-parser'
+
 
 const PORT = env.port
 
 const app = express()
   .use(Logger('[:date] :method :url  (:status)  :response-time ms'))
+  .use(bodyParser.json({ limit: '5mb', extended: true }))
+  .use(bodyParser.urlencoded({ limit: '5mb', extended: true }))
 setupRoutes(app)
 
 app.use((req, res, next) => {

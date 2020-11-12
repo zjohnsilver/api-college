@@ -22,6 +22,11 @@ export class StudentRepository {
   async getHistoricData (student_id) {
     return getMultiple(this.pool, queryGetHistoricData, [student_id])
   }
+
+  async createStudent (params) {
+    const { matriculation, name, email, birth_day, started_in } = params
+    return getOne(this.pool, queryCreateStudent, [ matriculation, name, email, birth_day, started_in ])
+  }
 }
 
 const queryGetStudentByID = `
@@ -70,4 +75,12 @@ const queryGetHistoricData = `
   LEFT JOIN manage."teacher" ON "teacher".id = "historic".teacher_id
   LEFT JOIN manage."student" ON "student".id = "historic".student_id
   WHERE "student".matriculation = $1
+`
+
+const queryCreateStudent = `
+  INSERT INTO manage."student"
+    (matriculation, name, email, birth_day, started_in)
+  VALUES
+    ($1, $2, $3, $4, $5)
+  RETURNING *
 `
