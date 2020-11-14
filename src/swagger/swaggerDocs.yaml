@@ -21,6 +21,23 @@ paths:
           description: "Not Found"
         500:
           description: "Internal Server Error"
+    post:
+      tags:
+        - "Student"
+      summary: "Create Student"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateStudent"
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"      
   /api/students/{matriculation}:
     get:
       tags:
@@ -41,6 +58,50 @@ paths:
           description: "Not Found"
         500:
           description: "Internal Server Error"
+    put:
+      tags:
+        - "Student"
+      summary: "Update Student"
+      parameters:
+        - name: matriculation
+          in: path
+          description: matriculation of student
+          required: true
+          schema:
+            type: integer
+            example: YYYY0001110123      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateStudent"
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"       
+    delete:
+      tags:
+        - "Student"
+      summary: "Delete Student"
+      parameters:
+        - name: matriculation
+          in: path
+          description: matriculation of student
+          required: true
+          schema:
+            type: integer
+            example: YYYY0001110123      
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"          
   /api/students/{matriculation}/subjects:
     get:
       tags:
@@ -81,3 +142,32 @@ paths:
           description: "Not Found"
         500:
           description: "Internal Server Error"
+
+
+components:
+  schemas:
+    CreateStudent:
+      type: "object"
+      properties:
+        matriculation:
+          type: "string"
+        name:
+          type: "string"  
+        email:
+          type: "string"
+        birth_day:
+          type: "string" 
+          format: "date-time"                  
+    UpdateStudent:
+      type: "object"
+      properties:
+        name:
+          type: "string"  
+        email:
+          type: "string"
+        birth_day:
+          type: "string"   
+          format: "date-time"             
+        started_in:
+          type: "string"     
+          format: "date-time"                                              

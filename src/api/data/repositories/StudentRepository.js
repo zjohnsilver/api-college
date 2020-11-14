@@ -40,6 +40,10 @@ export class StudentRepository {
 
     return getOne(this.pool, queryUpdateStudent)
   }
+
+  async deleteStudent (matriculation) {
+    return getOne(this.pool, queryDeleteStudent, [matriculation])
+  }
 }
 
 const queryGetStudentByID = `
@@ -95,5 +99,10 @@ const queryCreateStudent = `
     (matriculation, name, email, birth_day, started_in)
   VALUES
     ($1, $2, $3, $4, $5)
+  RETURNING *
+`
+const queryDeleteStudent = `
+  DELETE FROM manage."student"
+  WHERE matriculation = $1
   RETURNING *
 `

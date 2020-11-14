@@ -1,7 +1,7 @@
 import { ok } from '@api/helpers/http/http-helper'
 import { serverError } from '@helpers/errors'
 
-export class GetStudent {
+export class DeleteStudent {
   constructor (repository) {
     this.repository = repository
   }
@@ -9,8 +9,10 @@ export class GetStudent {
   async handle (httpRequest) {
     try{
       const { matriculation } = httpRequest.params
-      const student = await this.repository.get(matriculation)
-      return ok(student)
+
+      const student = await this.repository.deleteStudent(matriculation)
+
+      return ok(`Sucessfully delete student ${student?.name}`)
     }
     catch(err){
       return serverError(err.message)
