@@ -7,7 +7,7 @@ export class UpdateStudent {
   }
 
   async handle (httpRequest) {
-    try{
+    try {
       const { matriculation } = httpRequest.params
       const { name, email, birth_day, started_in } = httpRequest.body
 
@@ -18,8 +18,7 @@ export class UpdateStudent {
       const student = await this.repository.updateStudent(matriculation, paramsToUpdate)
 
       return ok(`Sucessfully update student ${student.name}`)
-    }
-    catch(err){
+    } catch (err) {
       return serverError(err.message)
     }
   }

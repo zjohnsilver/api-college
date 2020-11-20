@@ -7,14 +7,13 @@ export class DeleteStudent {
   }
 
   async handle (httpRequest) {
-    try{
+    try {
       const { matriculation } = httpRequest.params
 
       const student = await this.repository.deleteStudent(matriculation)
 
       return ok(`Sucessfully delete student ${student?.name}`)
-    }
-    catch(err){
+    } catch (err) {
       return serverError(err.message)
     }
   }

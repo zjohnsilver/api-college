@@ -6,7 +6,6 @@ import { Logger } from '@loaders'
 import swaggerRouter from './swagger/route'
 import bodyParser from 'body-parser'
 
-
 const PORT = env.port
 
 const app = express()
@@ -20,7 +19,7 @@ app.use((req, res, next) => {
 
   const routesSwagger = ['/', '/swagger-ui.css', '/swagger-ui-bundle.js', '/swagger-ui-init.js', '/swagger-ui-standalone-preset.js', '/swagger-ui-init.js']
 
-  if (!routesSwagger.includes(originalUrl)){
+  if (!routesSwagger.includes(originalUrl)) {
     res.status(404).send('Route Not Found')
     return
   }

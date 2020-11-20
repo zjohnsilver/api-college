@@ -7,6 +7,6 @@ export class GetAllStudents {
 
   async handle () {
     const students = await this.repository.getAll()
-    return ok({students: students})
+    return ok({ students: students })
   }
 }

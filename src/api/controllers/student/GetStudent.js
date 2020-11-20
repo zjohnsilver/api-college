@@ -7,12 +7,11 @@ export class GetStudent {
   }
 
   async handle (httpRequest) {
-    try{
+    try {
       const { matriculation } = httpRequest.params
       const student = await this.repository.get(matriculation)
       return ok(student)
-    }
-    catch(err){
+    } catch (err) {
       return serverError(err.message)
     }
   }

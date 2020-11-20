@@ -1,7 +1,7 @@
 import { ok } from '@api/helpers/http/http-helper'
 
 export class GetStudentHistoric {
-  constructor (repository, ) {
+  constructor (repository) {
     this.repository = repository
   }
 
@@ -9,6 +9,6 @@ export class GetStudentHistoric {
     const { id: student_id } = httpRequest.params
     const historicData = await this.repository.getHistoricData(student_id)
 
-    return ok({historic: historicData})
+    return ok({ historic: historicData })
   }
 }
