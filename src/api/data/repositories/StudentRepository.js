@@ -19,13 +19,17 @@ export class StudentRepository {
     return getMultiple(this.pool, queryGetStudentSubjects, [id])
   }
 
-  async getHistoricData (student_id) {
-    return getMultiple(this.pool, queryGetHistoricData, [student_id])
+  async getHistoricData (studentID) {
+    return getMultiple(this.pool, queryGetHistoricData, [studentID])
+  }
+
+  async getStudentsByCourse (courseID) {
+    return getMultiple(this.pool, queryGetStudentsByCourse, [courseID])
   }
 
   async createStudent (params) {
     const { matriculation, name, email, birth_day, started_in } = params
-    return getOne(this.pool, queryCreateStudent, [ matriculation, name, email, birth_day, started_in ])
+    return getOne(this.pool, queryCreateStudent, [matriculation, name, email, birth_day, started_in])
   }
 
   async updateStudent (matriculation, params) {
@@ -66,6 +70,19 @@ const queryGetAllStudents = `
     birth_day,
     started_in 
   FROM manage.student
+`
+
+const queryGetStudentsByCourse = `
+  SELECT 
+    "student".id, 
+    "student".matriculation,
+    "student".name,
+    "student".email,
+    "student".birth_day,
+    "student".started_in 
+  FROM manage.student_course
+  LEFT JOIN manage."student" ON "student".id = student_course.student_id
+  WHERE student_course.course_id = $1
 `
 
 const queryGetStudentSubjects = `
