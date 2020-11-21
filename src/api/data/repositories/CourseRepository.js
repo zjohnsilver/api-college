@@ -1,5 +1,5 @@
 import {
-  getOne
+  getOne, getMultiple
 } from '@services'
 
 export class CourseRepository {
@@ -10,6 +10,10 @@ export class CourseRepository {
   async addStudentToCourse (studentID, courseID) {
     return getOne(this.pool, queryAddStudentToCourse, [studentID, courseID])
   }
+
+  async getCourseSubjects (courseID) {
+    return getMultiple(this.pool, queryGetCourseSubjects, [courseID])
+  }
 }
 
 const queryAddStudentToCourse = `
@@ -18,4 +22,13 @@ const queryAddStudentToCourse = `
   VALUES
     ($1, $2)
   RETURNING *
+`
+const queryGetCourseSubjects = `
+  SELECT 
+    "subject".id,
+    "subject".name,
+    "course_subject".semester
+  FROM manage.course_subject
+  LEFT JOIN manage."subject" ON "subject".id = course_subject.subject_id
+  WHERE course_id = $1
 `
