@@ -73,8 +73,7 @@ const queryGetAllStudents = `
 `
 
 const queryGetStudentsByCourse = `
-  SELECT 
-    "student".id, 
+  SELECT  
     "student".matriculation,
     "student".name,
     "student".email,
@@ -83,6 +82,7 @@ const queryGetStudentsByCourse = `
   FROM manage.student_course
   LEFT JOIN manage."student" ON "student".id = student_course.student_id
   WHERE student_course.course_id = $1
+  ORDER BY matriculation
 `
 
 const queryGetStudentSubjects = `

@@ -15,12 +15,12 @@ export class CourseRepository {
     return getMultiple(this.pool, queryGetCourseSubjects, [courseID])
   }
 
-  async getCourseTeachers (courseID) {
-    return getMultiple(this.pool, queryGetCourseTeachers, [courseID])
-  }
-
   async getCourseTeacher (courseID, matriculation) {
     return getOne(this.pool, queryGetCourseTeacher, [courseID, matriculation])
+  }
+
+  async getStudentsOfCourseTeacher (courseID, teacherMatriculation) {
+    return getMultiple(this.pool, queryGetStudentsOfCourseTeacher, [courseID, teacherMatriculation])
   }
 }
 
@@ -40,17 +40,6 @@ const queryGetCourseSubjects = `
   LEFT JOIN manage."subject" ON "subject".id = course_subject.subject_id
   WHERE course_id = $1
 `
-const queryGetCourseTeachers = `
-  SELECT
-    "teacher".matriculation,
-    "teacher".name,
-    "teacher".email,
-    "teacher".birth_day
-  FROM manage.course_teacher
-  LEFT JOIN manage."teacher" ON "teacher".id = course_teacher.teacher_id
-  WHERE "course_teacher".course_id = $1
-  ORDER BY "teacher".matriculation
-`
 
 const queryGetCourseTeacher = `
   SELECT
@@ -61,5 +50,19 @@ const queryGetCourseTeacher = `
   FROM manage.course_teacher
   LEFT JOIN manage."teacher" ON "teacher".id = course_teacher.teacher_id
   WHERE "course_teacher".course_id = $1
+    AND "teacher".matriculation = $2
+`
+
+const queryGetStudentsOfCourseTeacher = `
+  SELECT
+    "student".matriculation,
+    "student".name,
+    "student".email,
+    "student".birth_day
+  FROM manage."class"
+  LEFT JOIN manage."student_course" ON "student_course".student_id = "class".student_id
+  LEFT JOIN manage."student" ON "student".id = "class".student_id
+  LEFT JOIN manage."teacher" ON "teacher".id = "class".teacher_id
+  WHERE "student_course".course_id = $1
     AND "teacher".matriculation = $2
 `

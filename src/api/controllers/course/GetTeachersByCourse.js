@@ -1,14 +1,14 @@
 import { ok } from '@api/helpers/http/http-helper'
 import env from '@config/env'
 
-export class GetCourseTeachers {
+export class GetTeachersByCourse {
   constructor (repository) {
     this.repository = repository
   }
 
   async handle (httpRequest) {
     const { id: courseID } = httpRequest.params
-    const teachers = await this.repository.getCourseTeachers(courseID)
+    const teachers = await this.repository.getTeachersByCourse(courseID)
 
     const addLinkToTeachers = teachers.map(teacher => (
       {
@@ -23,6 +23,11 @@ export class GetCourseTeachers {
             type: 'GET',
             rel: 'students',
             uri: `${env.host}/api/courses/${courseID}/teachers/${teacher.matriculation}/students`
+          },
+          {
+            type: 'GET',
+            rel: 'subjects',
+            uri: `${env.host}/api/courses/${courseID}/teachers/${teacher.matriculation}/subjects`
           }
         ]
       }

@@ -1,4 +1,6 @@
 export { GetStudentsByCourse } from './GetStudentsByCourse'
 export { GetCourseSubjects } from './GetCourseSubjects'
-export { GetCourseTeachers } from './GetCourseTeachers'
+export { GetTeachersByCourse } from './GetTeachersByCourse'
 export { GetCourseTeacher } from './GetCourseTeacher'
+export { GetStudentsOfCourseTeacher } from './GetStudentsOfCourseTeacher'
+export { GetTeacherSubjectsByCourse } from './GetTeacherSubjectsByCourse'
