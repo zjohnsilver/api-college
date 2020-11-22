@@ -55,6 +55,7 @@
     "@controllers": "src/api/controllers",
     "@services": "src/api/services",
     "@helpers/errors": "src/api/helpers/errors",
-    "@loaders": "src/loaders"
+    "@loaders": "src/loaders",
+    "@config": "src/config"
   }
 }

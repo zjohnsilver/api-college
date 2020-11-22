@@ -1,5 +1,5 @@
 import {
-  getMultiple
+  getMultiple, getOne
 } from '@services'
 
 export class TeacherRepository {
@@ -13,6 +13,10 @@ export class TeacherRepository {
     } else {
       return await getMultiple(this.pool, queryGetTeachers)
     }
+  }
+
+  async getTeacher (teacherID) {
+    return await getOne(this.pool, queryGetTeacher, [teacherID])
   }
 }
 
@@ -34,4 +38,14 @@ const queryGetTeachers = `
     email,
     birth_day
   FROM manage."teacher"
+`
+
+const queryGetTeacher = `
+  SELECT
+    matriculation,
+    name,
+    email,
+    birth_day
+  FROM manage."teacher"
+  WHERE "teacher".matriculation = $1
 `
