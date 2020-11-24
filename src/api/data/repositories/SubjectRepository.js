@@ -7,8 +7,8 @@ export class SubjectRepository {
     this.pool = pool
   }
 
-  async getDependencies (subjectID) {
-    return getMultiple(this.pool, queryGetDependenciesBySubject, [subjectID])
+  async getDependencies (courseID, subjectID) {
+    return getMultiple(this.pool, queryGetDependenciesBySubject, [courseID, subjectID])
   }
 
   async getSubject (subjectID) {
@@ -22,7 +22,8 @@ const queryGetDependenciesBySubject = `
     "subject".name
   FROM manage."prerequisites"
   LEFT JOIN manage."subject" ON "subject".id = "prerequisites".prerequisite_id
-  WHERE "prerequisites".subject_id = $1
+  WHERE "prerequisites".course_id = $1
+    AND "prerequisites".subject_id = $2
 `
 const queryGetSubject = `
   SELECT

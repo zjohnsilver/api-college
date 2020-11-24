@@ -1,4 +1,5 @@
 import { ok } from '@api/helpers/http/http-helper'
+import env from '@config/env'
 
 export class GetSubjectDependencies {
   constructor (repository) {
@@ -6,9 +7,27 @@ export class GetSubjectDependencies {
   }
 
   async handle (httpRequest) {
-    const { subject_id } = httpRequest.params
-    const dependencies = await this.repository.getDependencies(subject_id)
+    const { course_id, subject_id } = httpRequest.params
+    const dependencies = await this.repository.getDependencies(course_id, subject_id)
 
-    return ok({ dependencies })
+    const addLinkToDependencies = dependencies.map(dependency => (
+      {
+        ...dependency,
+        links: [
+          {
+            type: 'GET',
+            rel: 'self',
+            uri: `${env.host}/api/courses/${course_id}/subjects/${dependency.id}`
+          },
+          {
+            type: 'GET',
+            rel: 'dependencies',
+            uri: `${env.host}/api/courses/${course_id}/subjects/${dependency.id}/dependencies`
+          }
+        ]
+      }
+    ))
+
+    return ok({ dependencies: addLinkToDependencies })
   }
 }
