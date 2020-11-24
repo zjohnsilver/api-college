@@ -22,6 +22,10 @@ export class CourseRepository {
   async getStudentsOfCourseTeacher (courseID, teacherMatriculation) {
     return getMultiple(this.pool, queryGetStudentsOfCourseTeacher, [courseID, teacherMatriculation])
   }
+
+  async getCourseSubject (courseID, subjectID) {
+    return getOne(this.pool, queryGetCourseSubject, [courseID, subjectID])
+  }
 }
 
 const queryAddStudentToCourse = `
@@ -65,4 +69,14 @@ const queryGetStudentsOfCourseTeacher = `
   LEFT JOIN manage."teacher" ON "teacher".id = "class".teacher_id
   WHERE "student_course".course_id = $1
     AND "teacher".matriculation = $2
+`
+const queryGetCourseSubject = `
+  SELECT 
+    "subject".id,
+    "subject".name,
+    "course_subject".semester
+  FROM manage.course_subject
+  LEFT JOIN manage."subject" ON "subject".id = course_subject.subject_id
+    WHERE course_id = $1
+      and course_subject.subject_id = $2
 `

@@ -23,7 +23,7 @@ export class TeacherRepository {
     return getMultiple(this.pool, queryGetTeachersByCourse, [courseID])
   }
 
-  async getTeacherSubjectsByCourse (courseID, teacherMatriculation) {
+  async getTeacherSubjects (courseID, teacherMatriculation) {
     return getMultiple(this.pool, queryGetTeacherSubjectsByCourse, [courseID, teacherMatriculation])
   }
 }
