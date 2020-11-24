@@ -1,4 +1,5 @@
 import { ok } from '@api/helpers/http/http-helper'
+import env from '@config/env'
 
 export class GetCourseSubjects {
   constructor (repository) {
@@ -9,7 +10,25 @@ export class GetCourseSubjects {
     const { id: courseID } = httpRequest.params
     const subjects = await this.repository.getCourseSubjects(courseID)
 
-    const subjectsGroupBySemester = subjects.reduce((acc, curr) => {
+    const addLinkToSubjects = subjects.map(subject => (
+      {
+        ...subject,
+        links: [
+          {
+            type: 'GET',
+            rel: 'self',
+            uri: `${env.host}/api/courses/${courseID}/subjects/${subject.id}`
+          },
+          {
+            type: 'GET',
+            rel: 'dependencies',
+            uri: `${env.host}/api/courses/${courseID}/subjects/${subject.id}/dependencies`
+          }
+        ]
+      }
+    ))
+
+    const subjectsGroupBySemester = addLinkToSubjects.reduce((acc, curr) => {
       const key = `Semester ${curr.semester}`
       return {
         ...acc,
