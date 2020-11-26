@@ -8,6 +8,9 @@ tags:
 - name: "Student"
   description: "Student Routes"
 
+- name: "Course"
+  description: "Course Routes"
+
 paths:
   /api/students:
     get:
@@ -142,6 +145,202 @@ paths:
           description: "Not Found"
         500:
           description: "Internal Server Error"
+  /api/courses/{course_id}/students:
+    get:
+      tags:
+        - "Course"
+      summary: "Get all students of a course"
+      parameters:
+        - name: course_id
+          in: path
+          description: course_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"    
+  /api/courses/{course_id}/subjects:
+    get:
+      tags:
+        - "Course"
+      summary: "Get all subjects of a course"
+      parameters:
+        - name: course_id
+          in: path
+          description: is id of course
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"  
+  /api/courses/{course_id}/subjects/{subject_id}:
+    get:
+      tags:
+        - "Course"
+      summary: "Get information about only one specific subject"
+      parameters:
+        - name: course_id
+          in: path
+          description: is id of course
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: subject_id
+          in: path
+          description: is id of subject
+          required: true
+          schema:
+            type: integer
+            example: 1            
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"        
+  /api/courses/{course_id}/subjects/{subject_id}/dependencies:
+    get:
+      tags:
+        - "Course"
+      summary: "Get dependencies of a subject"
+      parameters:
+        - name: course_id
+          in: path
+          description: is id of course
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: subject_id
+          in: path
+          description: is id of subject
+          required: true
+          schema:
+            type: integer
+            example: 1            
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"     
+  /api/courses/{course_id}/teachers:
+    get:
+      tags:
+        - "Course"
+      summary: "Get all teachers of a course"
+      parameters:
+        - name: course_id
+          in: path
+          description: id of the course
+          required: true
+          schema:
+            type: integer
+            example: 1          
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"    
+  /api/courses/{course_id}/teachers/{matriculation}:
+    get:
+      tags:
+        - "Course"
+      summary: "Get info about a teacher"
+      parameters:
+        - name: course_id
+          in: path
+          description: id of the course
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: matriculation
+          in: path
+          description: matriculation of the teacher
+          required: true
+          schema:
+            type: integer
+            example: 1            
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"    
+  /api/courses/{course_id}/teachers/{matriculation}/students:
+    get:
+      tags:
+        - "Course"
+      summary: "Get students of a teacher"
+      parameters:
+        - name: course_id
+          in: path
+          description: id of the course
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: matriculation
+          in: path
+          description: matriculation of the teacher
+          required: true
+          schema:
+            type: integer
+            example: 1            
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"         
+  /api/courses/{course_id}/teachers/{matriculation}/subjects:
+    get:
+      tags:
+        - "Course"
+      summary: "Get subjects of a teacher"
+      parameters:
+        - name: course_id
+          in: path
+          description: id of the course
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: matriculation
+          in: path
+          description: matriculation of the teacher
+          required: true
+          schema:
+            type: integer
+            example: 1            
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"                                                                        
+          
 
 
 components:
