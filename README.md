@@ -1,7 +1,15 @@
 # API-COLLEGE
 
-Está é uma API-REST de interface para um esquema de banco simulando de uma faculdade real, e ela serve como um estudo de caso de um TCC comparando API-REST e GRAPHQL
+This is a documented REST-API that serves as access to a fictional college database
+
+## - ENV FILE
+
+Create a .env file following the model-env file
 
 ## - Install packages and start
 
 `npm install & npm start`
+
+## - Run with docker
+
+`docker-compose up`
