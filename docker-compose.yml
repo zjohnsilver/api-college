@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  api-college:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    image: api_college
+    volumes:
+      - .:/src
+      - /src/node_modules
+    ports:
+      - $PORT:$PORT

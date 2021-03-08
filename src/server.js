@@ -30,5 +30,5 @@ app.use((req, res, next) => {
 app.use(swaggerRouter.base, swaggerRouter.router)
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`)
+  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`)
 })
