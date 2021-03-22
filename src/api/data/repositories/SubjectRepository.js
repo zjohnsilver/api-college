@@ -8,7 +8,6 @@ export class SubjectRepository {
   }
 
   async getDependencies (courseID, subjectID) {
-    console.log('Oi')
     return getMultiple(this.pool, queryGetDependenciesBySubject, [courseID, subjectID])
   }
 
