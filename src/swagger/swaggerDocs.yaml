@@ -11,6 +11,9 @@ tags:
 - name: "Course"
   description: "Course Routes"
 
+- name: "Faker"
+  description: "Generate Faker Data Routes"
+
 paths:
   /api/students:
     get:
@@ -339,7 +342,25 @@ paths:
         404:
           description: "Not Found"
         500:
-          description: "Internal Server Error"                                                                        
+          description: "Internal Server Error"    
+  /api/generate-fake-data/students:
+    post:
+      tags:
+        - "Faker"
+      summary: "Generate Faker Students"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFakerStudent"
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"                                                                                
           
 
 
@@ -356,7 +377,14 @@ components:
           type: "string"
         birth_day:
           type: "string" 
-          format: "date-time"                  
+          format: "date-time"     
+    CreateFakerStudent:
+      type: "object"
+      properties:
+        course_id:
+          type: "integer"
+        amount:
+          type: "integer"                       
     UpdateStudent:
       type: "object"
       properties:

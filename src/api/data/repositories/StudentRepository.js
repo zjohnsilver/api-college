@@ -1,6 +1,6 @@
 import {
   getOne, getMultiple
-} from '@services'
+} from '@db/models'
 
 export class StudentRepository {
   constructor (pool) {
@@ -28,8 +28,24 @@ export class StudentRepository {
   }
 
   async createStudent (params) {
-    const { matriculation, name, email, birth_day, started_in } = params
-    return getOne(this.pool, queryCreateStudent, [matriculation, name, email, birth_day, started_in])
+    const { name, email, birth_day, started_in } = params
+    return getOne(this.pool, queryCreateStudent, [name, email, birth_day, started_in])
+  }
+
+  async createStudents (students) {
+    const promises = students.map(student => {
+      return getOne(this.pool, queryCreateStudent, [student.name, student.email, student.birth_day, student.started_in])
+    })
+
+    return Promise.all(promises)
+  }
+
+  async addStudentsToCourse (courseId, student_matriculations) {
+    const promises = student_matriculations.map(student_matriculation => {
+      return getOne(this.pool, queryAddStudentToCourse, [student_matriculation, courseId])
+    })
+
+    return Promise.all(promises)
   }
 
   async updateStudent (matriculation, params) {
@@ -63,7 +79,6 @@ const queryGetStudentByID = `
 
 const queryGetAllStudents = `
   SELECT 
-    id, 
     matriculation,
     name,
     email,
@@ -113,13 +128,20 @@ const queryGetHistoricData = `
 
 const queryCreateStudent = `
   INSERT INTO manage."student"
-    (matriculation, name, email, birth_day, started_in)
+    (name, email, birth_day, started_in)
   VALUES
-    ($1, $2, $3, $4, $5)
+    ($1, $2, $3, $4)
   RETURNING *
 `
 const queryDeleteStudent = `
   DELETE FROM manage."student"
   WHERE matriculation = $1
   RETURNING *
+`
+
+const queryAddStudentToCourse = `
+  INSERT INTO manage.student_course
+    ("student_matriculation", "course_id")
+  VALUES
+    ($1, $2)
 `

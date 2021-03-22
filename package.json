@@ -58,6 +58,7 @@
     "@helpers/errors": "src/api/helpers/errors",
     "@loaders": "src/loaders",
     "@config": "src/config",
-    "@helpers": "src/api/helpers"
+    "@helpers": "src/api/helpers",
+    "@db": "src/api/data/db"
   }
 }
