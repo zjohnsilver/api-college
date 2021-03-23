@@ -26,6 +26,22 @@ export class TeacherRepository {
   async getTeacherSubjects (courseID, teacherMatriculation) {
     return getMultiple(this.pool, queryGetTeacherSubjectsByCourse, [courseID, teacherMatriculation])
   }
+
+  async createTeachers (teachers) {
+    const promises = teachers.map(teacher => {
+      return getOne(this.pool, queryCreateTeacher, [teacher.name, teacher.email, teacher.birth_day])
+    })
+
+    return Promise.all(promises)
+  }
+
+  async addTeachersToCourse (courseId, teacher_matriculations) {
+    const promises = teacher_matriculations.map(teacher_matriculation => {
+      return getOne(this.pool, queryAddTeacherToCourse, [teacher_matriculation, courseId])
+    })
+
+    return Promise.all(promises)
+  }
 }
 
 const queryGetTeachersBySubjects = `
@@ -81,4 +97,18 @@ const queryGetTeacherSubjectsByCourse = `
   LEFT JOIN manage."course_subject" ON "course_subject".subject_id = "subject".id
     WHERE course_subject.course_id = $1
       AND "teacher".matriculation = $2
+`
+const queryCreateTeacher = `
+  INSERT INTO manage."teacher"
+    (name, email, birth_day)
+  VALUES
+    ($1, $2, $3)
+  RETURNING *
+`
+
+const queryAddTeacherToCourse = `
+  INSERT INTO manage.course_teacher
+    ("teacher_matriculation", "course_id")
+  VALUES
+    ($1, $2)
 `

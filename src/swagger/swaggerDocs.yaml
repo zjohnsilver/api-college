@@ -353,14 +353,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateFakerStudent"
+              $ref: "#/components/schemas/CreateFakerEntity"
       responses:
         200:
           description: "Its Worked"
         404:
           description: "Not Found"
         500:
-          description: "Internal Server Error"                                                                                
+          description: "Internal Server Error"   
+  /api/generate-fake-data/teachers:
+    post:
+      tags:
+        - "Faker"
+      summary: "Generate Faker Teachers"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFakerEntity"
+      responses:
+        200:
+          description: "Its Worked"
+        404:
+          description: "Not Found"
+        500:
+          description: "Internal Server Error"                                                                                         
           
 
 
@@ -378,7 +396,7 @@ components:
         birth_day:
           type: "string" 
           format: "date-time"     
-    CreateFakerStudent:
+    CreateFakerEntity:
       type: "object"
       properties:
         course_id:
