@@ -13,6 +13,10 @@ export class GetCourseSubjects {
     const addLinkToSubjects = subjects.map(subject => (
       {
         ...subject,
+        workload: {
+          value: subject.workload,
+          unit: 'h'
+        },
         links: [
           {
             type: 'GET',

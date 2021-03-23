@@ -39,7 +39,8 @@ const queryGetCourseSubjects = `
   SELECT 
     "subject".id,
     "subject".name,
-    "course_subject".semester
+    "course_subject".semester,
+    "course_subject".workload
   FROM manage.course_subject
   LEFT JOIN manage."subject" ON "subject".id = course_subject.subject_id
   WHERE course_id = $1
