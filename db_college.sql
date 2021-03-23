@@ -119,6 +119,7 @@ CREATE TABLE manage."course_subject" (
 	"course_id" INTEGER NOT NULL,
 	"subject_id" INTEGER NOT NULL,
 	"semester" INTEGER NOT NULL,
+	"workload" INTEGER NOT NULL,
 
     FOREIGN KEY (course_id)
         REFERENCES  manage.course (id)

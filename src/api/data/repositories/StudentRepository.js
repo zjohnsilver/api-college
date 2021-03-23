@@ -97,7 +97,7 @@ const queryGetStudentsByCourse = `
     "student".birth_day,
     "student".started_in 
   FROM manage.student_course
-  LEFT JOIN manage."student" ON "student".id = student_course.student_id
+  LEFT JOIN manage."student" ON "student".matriculation = student_course.student_matriculation
   WHERE student_course.course_id = $1
   ORDER BY matriculation
 `
@@ -108,7 +108,7 @@ const queryGetStudentSubjects = `
     subject.name 
   FROM manage."class"
   LEFT JOIN manage.subject ON "class".subject_id = subject.id 
-  LEFT JOIN manage.student ON "student".id = "class".student_id
+  LEFT JOIN manage.student ON "student".matriculation = "class".student_matriculation
   WHERE student.matriculation = $1
 `
 
@@ -124,7 +124,7 @@ const queryGetHistoricData = `
   FROM manage."historic"
   LEFT JOIN manage."subject" ON "subject".id = "historic".subject_id
   LEFT JOIN manage."teacher" ON "teacher".id = "historic".teacher_id
-  LEFT JOIN manage."student" ON "student".id = "historic".student_id
+  LEFT JOIN manage."student" ON "student".matriculation = "historic".student_matriculation
   WHERE "student".matriculation = $1
 `
 
