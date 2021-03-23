@@ -7,8 +7,8 @@ export class StudentRepository {
     this.pool = pool
   }
 
-  async get (id) {
-    return getOne(this.pool, queryGetStudentByID, [id])
+  async get (matriculation) {
+    return getOne(this.pool, queryGetStudent, [matriculation])
   }
 
   async getAll () {
@@ -66,9 +66,8 @@ export class StudentRepository {
   }
 }
 
-const queryGetStudentByID = `
+const queryGetStudent = `
   SELECT 
-    id, 
     matriculation,
     name,
     email,
@@ -78,13 +77,16 @@ const queryGetStudentByID = `
 `
 
 const queryGetAllStudents = `
-  SELECT 
-    matriculation,
-    name,
-    email,
-    birth_day,
-    started_in 
+  SELECT
+    jsonb_build_object('id', course.id, 'name', course.name) as course,
+    student.matriculation,
+    student.name,
+    student.email,
+    student.birth_day,
+    student.started_in 
   FROM manage.student
+  LEFT JOIN manage."student_course" ON student_course.student_matriculation = student.matriculation
+  LEFT JOIN manage.course ON course.id = student_course.course_id
 `
 
 const queryGetStudentsByCourse = `
