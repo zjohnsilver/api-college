@@ -2,14 +2,22 @@
 
 This is a documented REST-API that serves as access to a fictional college database
 
-## - ENV FILE
+## - Create the .env file
 
 Create a .env file following the model-env file
 
-## - Install packages and start
+## - Starting API
 
-`npm install & npm start`
+```sh
+  make local/docker/start/api
+```
 
-## - Run with docker
+## - Starting Database
 
-`docker-compose up`
+```sh
+  make local/docker/start/db
+```
+
+## - Populate Database
+
+  Run the code in db_college.sql in your database
