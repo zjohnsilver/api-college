@@ -11,3 +11,14 @@ services:
       - /src/node_modules
     ports:
       - $PORT:$PORT
+  postgresql:
+    container_name: db_college_pg
+    image: postgres:14-alpine
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: db_college
+      POSTGRES_PASSWORD: db_college
+      POSTGRES_USER: db_college
