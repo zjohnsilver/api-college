@@ -11,9 +11,6 @@ CREATE TABLE manage."student" (
 );
 
 CREATE SEQUENCE manage.student_id_seq;
-ALTER TABLE manage.student ALTER COLUMN matriculation SET NOT NULL;
-ALTER TABLE manage.student ALTER COLUMN matriculation SET DEFAULT nextval('manage.student_id_seq');
-ALTER SEQUENCE manage.student_id_seq OWNED BY student.matriculation ;
 ALTER SEQUENCE manage.student_id_seq RESTART 20210000000000;
 
 -- DROP TABLE manage.teacher;
@@ -26,9 +23,6 @@ CREATE TABLE manage.teacher (
 );
 
 CREATE SEQUENCE manage.teacher_id_seq;
-ALTER TABLE manage.teacher ALTER COLUMN matriculation SET NOT NULL;
-ALTER TABLE manage.teacher ALTER COLUMN matriculation SET DEFAULT nextval('manage.teacher_id_seq');
-ALTER SEQUENCE manage.teacher_id_seq OWNED BY teacher.matriculation ;
 ALTER SEQUENCE manage.teacher_id_seq RESTART 20211000000000;
 
 
