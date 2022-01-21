@@ -6,7 +6,7 @@
   "scripts": {
     "start": "env-cmd nodemon --exec babel-node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"    
+    "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
     "moment-timezone": "^0.5.31",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "standard": "^14.3.4",
+    "standard": "^16.0.4",
     "swagger-ui-express": "^4.1.4",
     "yaml-import": "^2.0.0"
   },
