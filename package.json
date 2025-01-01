@@ -61,5 +61,8 @@
     "@config": "src/config",
     "@helpers": "src/api/helpers",
     "@db": "src/api/data/db"
+  },
+  "volta": {
+    "node": "9.9.0"
   }
 }

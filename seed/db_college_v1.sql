@@ -1,3 +1,8 @@
+------------------------
+-- CREATE TABLES OF
+-- db_college
+------------------------
+
 CREATE SCHEMA manage;
 
 -- DROP TABLE manage.student;
